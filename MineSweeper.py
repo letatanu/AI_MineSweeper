@@ -3,6 +3,32 @@ import random
 import re
 import time
 from string import ascii_lowercase
+import tkinter
+
+
+top = tkinter.Tk()
+color = {' ': 'black',
+         'X': 'black',
+         'F': 'black',
+         '1': 'red',
+         '2': 'green',
+         '3': 'blue',
+         '4': 'orange',
+         '5': 'purple',
+         '6': 'yellow'
+}
+
+def initGUI(grid):
+    row = 0
+    for gridrow in grid:
+        col = 0
+        for gridcol in gridrow:
+            tkinter.Button(top, width=2, height=1, fg=color[gridcol], text=gridcol).grid(row=row, column=col)
+            col += 1
+        row += 1
+
+def updateGUI(cell, row, col):
+    tkinter.Button(top, width=2, height=1, fg=color[cell], text=cell).grid(row=row, column=col)
 
 
 def setupgrid(gridsize, start, numberofmines):
@@ -139,8 +165,8 @@ def parseinput(inputstring, gridsize, helpmessage):
 
 
 def playgame():
-    gridsize = 5
-    numberofmines = 10
+    gridsize = 10
+    numberofmines = 25
 
     currgrid = [[' ' for i in range(gridsize)] for i in range(gridsize)]
 
@@ -151,7 +177,8 @@ def playgame():
     helpmessage = ("Type the column followed by the row (eg. a5). "
                    "To put or remove a flag, add 'f' to the cell (eg. a5f).")
 
-    showgrid(currgrid)
+    # showgrid(currgrid)
+    initGUI(currgrid)
     print(helpmessage + " Type 'help' to show this message again.\n")
 
     while True:
@@ -161,6 +188,7 @@ def playgame():
 
         message = result['message']
         cell = result['cell']
+        print(cell)
 
         if cell:
             print('\n\n')

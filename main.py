@@ -29,6 +29,9 @@ def main():
         while r != -1 or r != 1:
             score = score + 1
             r = agent.train(epsilon)
+            # a win game gives a score of 3
+            if r == 1:
+                score = score + 3
         scores.append(score)
         epoch = epoch+1
 

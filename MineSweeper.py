@@ -154,5 +154,5 @@ class MineSweeper:
                     'It took you {} minutes and {} seconds.\n'.format(minutes,
                                                                       seconds))
                 self.showgrid(self.grid)
-                return 0
+                return 1
         return 0

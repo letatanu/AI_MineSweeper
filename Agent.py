@@ -53,7 +53,7 @@ class Agent:
     def arrayToString(self, array):
         return ".".join(str(x) for x in array)
 
-    # get cells along border of uncovered and convered cells.
+    # get cells along border of uncovered and covered cells.
     def getBorderCells(self, grid):
         result = []
         maxI = len(grid)
@@ -158,7 +158,7 @@ class Agent:
         print(newLocation)
         Q_s_b, reward = self.Q_s_b(newLocation)
         self.Q_Matrix[chosenState][action] = self.Q_Matrix[chosenState][action] + self.lr * (reward + self.gamma * (np.max(Q_s_b)) - self.Q_Matrix[chosenState][action])
-        if reward == -1:
+        if reward == -1 or reward == 1:
             self.gameObject = MineSweeper(gridsize=self.gameObject.gridsize, numberOfMines=self.gameObject.numberofmines)
         return reward
 

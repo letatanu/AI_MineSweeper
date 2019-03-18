@@ -159,7 +159,7 @@ class Agent:
         Q_s_b, reward = self.Q_s_b(newLocation)
         self.Q_Matrix[chosenState][action] = self.Q_Matrix[chosenState][action] + self.lr * (reward + self.gamma * (np.max(Q_s_b)) - self.Q_Matrix[chosenState][action])
         if reward == -1:
-            self.gameObject = MineSweeper()
+            self.gameObject = MineSweeper(gridsize=self.gameObject.gridsize, numberOfMines=self.gameObject.numberofmines)
         return reward
 
 

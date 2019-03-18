@@ -4,11 +4,13 @@ from Agent import *
 
 
 def main():
-    game = MineSweeper()
+    gridSize = 7
+    numberOfMines = 10
+    game = MineSweeper(gridsize=gridSize, numberOfMines=numberOfMines)
     agent = Agent(gameObject=game)
     epsilon = 0.1
     delta = 0.01
-    numberOfEpoch = 10000
+    numberOfEpoch = 100000
     m = numberOfEpoch*delta
     epoch = 1
     # running for xxx epochs

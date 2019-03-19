@@ -94,6 +94,11 @@ class Agent:
                             continue
         return result
 
+    # this function for testing,
+    def play(self, curgrid):
+        currentStates = self.getBorderCells(curgrid)
+        chosenState, location = self.stateHavingMaxQ_Val(currentStates)
+        return location
 
     def addNewState(self, state):
         # get current state

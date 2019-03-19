@@ -132,6 +132,8 @@ class Agent:
             tmpState = self.createState(currentState, self.gameObject.currgrid)
             newState = tmpState.ravel().tolist()
             key = self.arrayToString(newState)
+            if not key in self.Q_Matrix:
+                continue
             a = np.max(self.Q_Matrix[key])
             if a > comp:
                 comp = a

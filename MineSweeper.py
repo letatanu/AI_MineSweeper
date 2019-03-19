@@ -124,7 +124,6 @@ class MineSweeper:
             print('\n\n')
             rowno, colno = loc
             currcell = self.currgrid[rowno][colno]
-            # flag = result['flag']
 
             if not self.grid:
                 self.grid, mines = self.setupgrid(self.gridsize, loc, self.numberofmines)
@@ -142,7 +141,7 @@ class MineSweeper:
             else:
                 print(loc)
                 print("That cell is already shown")
-                return 0
+                return -2
 
             currGrid = np.array(self.currgrid)
             minesleft = self.numberofmines - len(currGrid[currGrid=='E'])

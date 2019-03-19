@@ -2,33 +2,34 @@ from MineSweeper import *
 from Agent import *
 import pickle
 import matplotlib.pyplot as plt
-gridSize = 9
-numberOfMines = 7
+gridSize = 7
+numberOfMines = 5
 
 
 def main():
-    train()
-
+    test()
+    # train()
 
 def test():
     # create a new game
-    game = MineSweeper(gridsize=gridSize, numberOfMines=numberOfMines)
+    cgridSize = 7
+    cnumberOfMines = 5
+    game = MineSweeper(gridsize=cgridSize, numberOfMines=cnumberOfMines)
     q_matrix = pickle.load(open('Q_Matrix%d_%d.p' % (gridSize, numberOfMines), "rb"))
-    agent = Agent(Q_Matrix=q_matrix)
-
+    agent = Agent(Q_Matrix=q_matrix, gameObject=game)
     r = 0
+    game.showgrid(game.currgrid)
     while r!=-1 and r !=1:
-        loc = agent.play(game.currgrid) # get an action for current grid
-        game.playgame(loc) # doing an action
-
-
+        loc = agent.play() # get an action for current grid
+        print(loc)
+        r = game.playgame(loc) # doing an action
 
 def train():
     game = MineSweeper(gridsize=gridSize, numberOfMines=numberOfMines)
     agent = Agent(gameObject=game)
     epsilon = 0.1
     delta = 0.01
-    numberOfEpoch = 1000000
+    numberOfEpoch = 100000
     m = numberOfEpoch * delta
     epoch = 1
     # running for xxx epochs

@@ -26,7 +26,7 @@ def main():
         # run an epoch
         # each correct step, score = 1
         score = 0
-        while r != -1 or r != 1:
+        while r != -1 and r != 1:
             score = score + 1
             r = agent.train(epsilon)
             # a win game gives a score of 3
@@ -35,12 +35,15 @@ def main():
         scores.append(score)
         epoch = epoch+1
 
+    # take average for every m elements
+    scores = np.mean(np.array(scores).reshape(-1, int(m)), axis=1)
+
     print(epoch)
     plt.plot(scores)
-    plt.xlabel("Epochs")
+    plt.xlabel("%d X Epochs"%int(m))
     plt.ylabel("Score")
     plt.savefig('player1.png')
-    pickle.dump(agent.Q_Matrix, open('Q_Matrix.p', "wb"))
+    pickle.dump(agent.Q_Matrix, open('Q_Matrix5.p', "wb"))
 
 if __name__ == '__main__':
     main()

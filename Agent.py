@@ -102,7 +102,12 @@ class Agent:
     def play(self):
         currentStates = self.getBorderCells(self.gameObject.currgrid)
         chosenState, location = self.stateHavingMaxQ_Val(currentStates)
-        action = np.argmax(self.Q_Matrix[chosenState])
+        # if the state is not in Q_Matrix, it will choose random action for that state.
+        if not chosenState in self.Q_Matrix:
+            newState = self.createState(location, self.gameObject.currgrid)
+            action = np.random.choice(newState[newState=='E'], 1, replace=False)
+        else:
+            action = np.argmax(self.Q_Matrix[chosenState])
         newLocation = [location[0]+int(action/3)-1, location[1]+action%3-1]
         return newLocation
 

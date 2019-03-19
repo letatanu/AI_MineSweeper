@@ -12,8 +12,8 @@ def main():
 
 def test():
     # create a new game
-    cgridSize = 7
-    cnumberOfMines = 5
+    cgridSize = 9
+    cnumberOfMines = 10
     numberOfGames = 1000
     countOfWinGame = 0
     for i in range(numberOfGames):

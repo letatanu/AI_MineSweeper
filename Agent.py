@@ -30,12 +30,16 @@ class Agent:
         maxI = len(grid)
         maxJ = len(grid[0])
         state[1][1] = grid[i][j]
+
         if 0 <= i - 1:
             state[0][1] = grid[i-1][j]
+
             if 0 <= j-1:
                 state[0][0] = grid[i-1][j-1]
+
             if maxJ > j+1:
                 state[0][2] = grid[i-1][j+1]
+
         if 0 <= j-1:
             state[1][0] = grid[i][j-1]
 
@@ -95,10 +99,12 @@ class Agent:
         return result
 
     # this function for testing,
-    def play(self, curgrid):
-        currentStates = self.getBorderCells(curgrid)
+    def play(self):
+        currentStates = self.getBorderCells(self.gameObject.currgrid)
         chosenState, location = self.stateHavingMaxQ_Val(currentStates)
-        return location
+        action = np.argmax(self.Q_Matrix[chosenState])
+        newLocation = [location[0]+int(action/3)-1, location[1]+action%3-1]
+        return newLocation
 
     def addNewState(self, state):
         # get current state
@@ -121,11 +127,13 @@ class Agent:
     def stateHavingMaxQ_Val(self, currentStates):
         comp = -99999
         state = ''
-        location = [0,0]
+        location = currentStates[np.random.choice(np.array(currentStates).shape[0], 1, replace=False)[0]]
         for currentState in currentStates:
             tmpState = self.createState(currentState, self.gameObject.currgrid)
             newState = tmpState.ravel().tolist()
             key = self.arrayToString(newState)
+            if not key in self.Q_Matrix:
+                continue
             a = np.max(self.Q_Matrix[key])
             if a > comp:
                 comp = a

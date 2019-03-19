@@ -2,33 +2,52 @@ from MineSweeper import *
 from Agent import *
 import pickle
 import matplotlib.pyplot as plt
-gridSize = 9
-numberOfMines = 7
+gridSize = 7
+numberOfMines = 5
 
 
 def main():
-    train()
-
+    test()
+    # train()
 
 def test():
     # create a new game
-    game = MineSweeper(gridsize=gridSize, numberOfMines=numberOfMines)
-    q_matrix = pickle.load(open('Q_Matrix%d_%d.p' % (gridSize, numberOfMines), "rb"))
-    agent = Agent(Q_Matrix=q_matrix)
+    cgridSize = 7
+    cnumberOfMines = 5
+    numberOfGames = 1000
+    countOfWinGame = 0
+    for i in range(numberOfGames):
+        ####################Playing a game ######################
 
-    r = 0
-    while r!=-1 and r !=1:
-        loc = agent.play(game.currgrid) # get an action for current grid
-        game.playgame(loc) # doing an action
+        # initializing a minesweeper game
+        game = MineSweeper(gridsize=cgridSize, numberOfMines=cnumberOfMines)
+        # reading trained q_matrix
+        q_matrix = pickle.load(open('Q_Matrix%d_%d.p' % (gridSize, numberOfMines), "rb"))
+        #initializing an agent for that q_matrix and game
+        agent = Agent(Q_Matrix=q_matrix, gameObject=game)
+        r = 0
+        #showing current grid of game
+        game.showgrid(game.currgrid)
+        while r!=-1 and r !=1:
+            # agent returns its decision for the action
+            loc = agent.play() # get an action for current grid
+            print(loc)
+            # passing the location to game
+            r = game.playgame(loc) # doing an action
+       #############################################################################
 
 
+            if r == 1:
+                countOfWinGame = countOfWinGame + 1
+
+    print('%d win games over %d games'%(countOfWinGame, numberOfGames))
 
 def train():
     game = MineSweeper(gridsize=gridSize, numberOfMines=numberOfMines)
     agent = Agent(gameObject=game)
     epsilon = 0.1
     delta = 0.01
-    numberOfEpoch = 1000000
+    numberOfEpoch = 100000
     m = numberOfEpoch * delta
     epoch = 1
     # running for xxx epochs

@@ -1,6 +1,8 @@
 # AI_MineSweeper
 The agent is trained by using the reinforcement learning method (Q-Matrix). 
-
+Failed Attempt          |  Successful Attempt
+:-------------------------:|:-------------------------:
+![training](failedAttempt.gif)  |  ![training](successAttempt.gif)
 ## Defining State
 The reinforcement learning is simply a table of states and actions, where its value is the reward for a specific state with associating action. Below is the example of a Q-matrix used in the reinforcement learning method. 
 ![](example.png)

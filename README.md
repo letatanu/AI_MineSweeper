@@ -16,7 +16,7 @@ For the given example below, the state of the square in the green cirle is `0.0.
 
 ![](fullsizeoutput_c0.jpeg)
 ## Algorithm
-We initialize the agent with learning rate is 0.1, ![\gamma = 0.1](https://latex.codecogs.com/png.latex?\dpi{100}\gamma=0.1). For an epoch, we will repeat following steps until the game ends:
+We initialize the agent with learning rate is 0.1, ![\gamma(https://latex.codecogs.com/png.latex?\dpi{100}\gamma) = 0.1. For an epoch, we will repeat following steps until the game ends:
 
 1. Finding all possible states for the current grid and then
 2. Save all of them to the Q-Matrix if they are not in the Q-Matrix and save all of them to the **currentStates** array.

@@ -2,8 +2,8 @@ from MineSweeper import *
 from Agent import *
 import pickle
 import matplotlib.pyplot as plt
-gridSize = 7
-numberOfMines = 5
+gridSize = 5
+numberOfMines = 3
 
 
 def main():
@@ -39,6 +39,7 @@ def test():
 
             if r == 1:
                 countOfWinGame = countOfWinGame + 1
+                # return
 
     print('%d win games over %d games'%(countOfWinGame, numberOfGames))
 

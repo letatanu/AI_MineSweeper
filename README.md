@@ -3,9 +3,11 @@ The agent is trained by using the reinforcement learning method (Q-Matrix).
 Failed Attempt          |  Successful Attempt
 :-------------------------:|:-------------------------:
 ![training](failedAttempt.gif)  |  ![training](successAttempt.gif)
-## Defining State
+# Reinforcement Learning
 The reinforcement learning is simply a table of states and actions, where its value is the reward for a specific state with associating action. Below is the example of a Q-matrix used in the reinforcement learning method. 
 ![](example.png)
+
+## Defining State
 
 In the minesweeper, we do not need to care about the squares where all of their neighbors are already revealed. We only care about the quares that has at least one of its neighbors being empty. Therefore, we decided to define a state as a square that has at least one of its neighbors being empty. For the action of revealing a square, which is already reaveled or out of the grid, from its neighbors of a state, its reward is defined as `-inf`. Otherwise, the initial reward is `0`. 
 \
@@ -13,7 +15,7 @@ In the minesweeper, we do not need to care about the squares where all of their 
 For the given example below, the state of the square in the green cirle is `0.0.-1.1.1.1.-1.E.E.-1`. 9 actions of that state for revealing 9 squares which are its neighbors and itself are initially `[-inf, -inf, -inf, -inf, -inf, -inf, 0, 0, -inf]`
 
 ![](fullsizeoutput_c0.jpeg)
-## Reinforcement Learning
+## Algorithm
 We initialize the agent with learning rate is 0.1, ![\gamma = 0.1](https://latex.codecogs.com/png.latex?\dpi{100}\gamma=0.1). For an epoch, we will repeat following steps until the game ends:
 
 1. Finding all possible states for the current grid and then
